@@ -66,12 +66,10 @@ class Event extends Model
         return $this->morphMany(File::class,'attachables');
     }
 
-    public function coverImage(){
+    public function coverImage(){ //check this
 
         return $this->files->where('type','cover_image')->first();
 
     }
-
-
 
 }
