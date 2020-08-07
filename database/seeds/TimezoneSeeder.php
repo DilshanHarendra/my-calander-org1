@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Timezone;
 
 class TimezoneSeeder extends Seeder
 {
@@ -607,6 +608,6 @@ class TimezoneSeeder extends Seeder
         ];
 
         foreach ($timezones as $timezone)
-            \App\Timezone::create(['zone' => $timezone]);
+            Timezone::create(['zone' => $timezone]);
     }
 }

@@ -5398,7 +5398,7 @@ __webpack_require__.r(__webpack_exports__);
         return DATA_KEY$6;
       }
     }, {
-      key: "Event",
+      key: "Models.Event.Event",
       get: function get() {
         return Event;
       }
@@ -5578,7 +5578,7 @@ __webpack_require__.r(__webpack_exports__);
         return DATA_KEY$7;
       }
     }, {
-      key: "Event",
+      key: "Models.Event.Event",
       get: function get() {
         return Event$1;
       }
@@ -41945,7 +41945,7 @@ if (inBrowser && !isIE) {
   if (
     performance &&
     typeof performance.now === 'function' &&
-    getNow() > document.createEvent('Event').timeStamp
+    getNow() > document.createEvent('Models.Event.Event').timeStamp
   ) {
     // if the event timestamp, although evaluated AFTER the Date.now(), is
     // smaller than it, it means the event is using a hi-res timestamp,

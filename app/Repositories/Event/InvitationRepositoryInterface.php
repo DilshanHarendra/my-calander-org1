@@ -1,9 +1,8 @@
 <?php
 
+namespace App\Repositories\Event;
 
-namespace App\Repositories\Calendar;
-
-interface CalendarRepositoryInterface
+interface InvitationRepositoryInterface
 {
     public function getAll();
 
@@ -11,7 +10,7 @@ interface CalendarRepositoryInterface
 
     public function get($id);
 
-    public function getByEmail($email);
+    public function getByEvent($email);
 
     public function create(array $requestData);
 

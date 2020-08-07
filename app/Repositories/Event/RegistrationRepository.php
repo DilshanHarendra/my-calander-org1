@@ -2,34 +2,34 @@
 
 namespace App\Repositories\Event;
 
-use App\Event;
+use App\Event\Registration;
 
-class EventRepository implements EventRepositoryInterface
+class RegistrationRepository implements RegistrationRepositoryInterface
 {
     public function getAll()
     {
-        return Event::get();
+        return Registration::get();
     }
 
     public function getPaginated(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
-        return Event::paginate($limit);
+        return Registration::paginate($limit);
     }
 
     public function get($id)
     {
-        return Event::findorfail($id);
+        return Registration::findorfail($id);
     }
 
-    public function getByEmail($email)
+    public function getByEvent($event)
     {
-        return Event::where('creator_email',$email)->get();
+        return Registration::where('event_id',$event->id)->get();
     }
 
     public function create(array $requestData)
     {
-        return Event::create($requestData);
+        return Registration::create($requestData);
     }
 
     public function update(array $requestData, $id)

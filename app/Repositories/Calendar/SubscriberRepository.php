@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Repositories\Event;
+namespace App\Repositories\Calendar;
 
-use App\Event;
+use App\Calendar\Subscriber;
 
-class EventRepository implements EventRepositoryInterface
+class SubscriberRepository implements SubscriberRepositoryInterface
 {
     public function getAll()
     {
-        return Event::get();
+        return Subscriber::get();
     }
 
     public function getPaginated(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
-        return Event::paginate($limit);
+        return Subscriber::paginate($limit);
     }
 
     public function get($id)
     {
-        return Event::findorfail($id);
+        return Subscriber::findorfail($id);
     }
 
-    public function getByEmail($email)
+    public function getByCalendar($calendar)
     {
-        return Event::where('creator_email',$email)->get();
+        return Subscriber::where('calendar_id',$calendar->id)->get();
     }
 
     public function create(array $requestData)
     {
-        return Event::create($requestData);
+        return Subscriber::create($requestData);
     }
 
     public function update(array $requestData, $id)
@@ -44,5 +44,6 @@ class EventRepository implements EventRepositoryInterface
         $entity = $this->get($id);
         return $entity->delete();
     }
+
 
 }
