@@ -27,8 +27,8 @@ class RegisterController extends ApiController
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'business_name' => ['required', 'string', 'max:255'],
-            'user_category' => ['required'],
+            'business_name' => ['required_if:user_category,1', 'string', 'max:255'],
+            'user_category' => ['required', 'in:0,1'],
             'password' => ['required', 'string', 'min:8'],
         ]);
 

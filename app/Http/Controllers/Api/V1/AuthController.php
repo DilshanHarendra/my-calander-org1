@@ -21,7 +21,7 @@ class AuthController extends ApiController
      * @return string
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(Request $request): string
+    public function login(Request $request)
     {
         $this->validate($request, [
             'email'     => 'required|email',

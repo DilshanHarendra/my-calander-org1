@@ -21,12 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
-
     Route::post('register', 'RegisterController@register');
 
     Route::post('login', 'AuthController@login');
 
-    Route::get('me', 'ProfileController@selfProfile');
+    Route::get('me', 'ProfileController@selfProfile')->middleware('jwt_auth');
 
 
 });

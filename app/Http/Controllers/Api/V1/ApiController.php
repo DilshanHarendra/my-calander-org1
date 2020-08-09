@@ -19,9 +19,6 @@ class ApiController extends Controller
 
 
 
-
-
-
     /**
      * Create a new token.
      *

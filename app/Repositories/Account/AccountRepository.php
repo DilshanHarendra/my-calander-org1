@@ -53,8 +53,15 @@ class AccountRepository implements AccountRepositoryInterface
     public function createData(array $request)
     {
         $account = new Account();
-        $account->name = $request['business_name'];
-        $account->account_type = $request['user_category'];
+
+        if ($request['user_category'] === 0) {
+            $account->name = $request['name']; // gets user name from request
+            $account->account_type = 0; // PersonalAccount
+        } else {
+            $account->name = $request['business_name'];
+            $account->account_type = 1; // BusinessAccount
+        }
+
         return $account->save();
     }
 

@@ -29,7 +29,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function getDataById(int $id)
     {
-        // TODO: Implement getDataById() method.
+        return User::findOrFail($id);
     }
 
     public function getDataByKeyAndValue($key, $value)
@@ -45,7 +45,7 @@ class UserRepository implements UserRepositoryInterface
         $user->password = Hash::make($request['password']);
         $user->save();
         $account = $this->accountRepository->createData($request);
-        $user->account()->attach($account);
+        $user->accounts()->attach($account);
         return $user;
     }
 
