@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\v1\Calendar;
+namespace App\Http\Controllers\Api\V1\Calendar;
 use App\Calendar;
 use App\Repositories\Calendar\CalendarRepositoryInterface;
 
