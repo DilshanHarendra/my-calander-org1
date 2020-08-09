@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Tenant\Account;
+use App\Models\Tenant\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +35,15 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+
+        Route::bind('account', function ($value, $route) {
+            return $this->getModel(Account::class, $value);
+        });
+
+        Route::bind('user', function ($value, $route) {
+            return $this->getModel(User::class, $value);
+        });
     }
 
     /**
@@ -76,5 +87,19 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+
+    /**
+     * @param $model
+     * @param $routeKey
+     * @return mixed
+     */
+    private function getModel($model, $routeKey)
+    {
+        $id = \Hashids::connection($model)->decode($routeKey)[0] ?? null;
+        $modelInstance = resolve($model);
+
+        return  $modelInstance->findOrFail($id);
     }
 }

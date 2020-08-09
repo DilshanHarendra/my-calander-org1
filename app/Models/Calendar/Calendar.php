@@ -1,8 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models\Calendar;
 
-use App\Calendar\Subscriber;
+
+use App\Models\Event\Event;
+use App\Models\Tenant\Account;
 use Illuminate\Database\Eloquent\Model;
 
 class Calendar extends Model

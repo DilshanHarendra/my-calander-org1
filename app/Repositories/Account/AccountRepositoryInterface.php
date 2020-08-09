@@ -6,12 +6,18 @@ namespace App\Repositories\Account;
 
 interface AccountRepositoryInterface
 {
-    public function get($id);
+    public function getAllData(array $request);
 
-    public function create(array $requestData);
+    public function getPaginatedData(array $request);
 
-    public function update(array $requestData, $id);
+    public function getDataById(int $id);
 
-    public function delete($id);
+    public function getDataByKeyAndValue($key, $value);
+
+    public function createData(array $request);
+
+    public function updateData(int $id, array $request);
+
+    public function deleteData(int $id);
 
 }
