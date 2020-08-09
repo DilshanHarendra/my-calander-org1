@@ -34,7 +34,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function getDataByKeyAndValue($key, $value)
     {
-        // TODO: Implement getDataByKeyAndValue() method.
+        return User::where($key, $value)->first();
     }
 
     public function createData(array $request)
