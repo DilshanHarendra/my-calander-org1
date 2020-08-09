@@ -15,7 +15,7 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->id,
+            "id" => $this->getRouteKey(),
             "name" => $this->name,
             "email" => $this->email,
             "accounts" => AccountResource::collection($this->accounts)

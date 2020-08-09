@@ -4,10 +4,15 @@ namespace App\Models\Tenant;
 
 use App\Models\Calendar\Calendar;
 use App\Models\Event\Event;
+use App\Traits\Hashidable;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+
+    use Hashidable;
+
+
     protected $table = 'accounts';
 
     public function users()
@@ -24,5 +29,7 @@ class Account extends Model
     {
         return $this->hasManyThrough(Event::class,Calendar::class);
     }
+
+
 
 }

@@ -28,4 +28,13 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
     Route::get('me', 'ProfileController@selfProfile')->middleware('jwt_auth');
 
 
+    Route::group(['prefix' => '{account}', 'middleware' => ['jwt_auth']], function () {
+
+        Route::get('/', 'TestController@index'); // TEST
+
+        // PLACE REST OF THE ROUTES WHICH SUPPOSE TO BE UNDER ACCOUNT ROUTE
+
+    });
+
+
 });

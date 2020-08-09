@@ -17,7 +17,7 @@ class AccountResource extends JsonResource
 //        return parent::toArray($request);
 
         return [
-            "id" =>  $this->id,
+            "id" =>  $this->getRouteKey(),
             "name" => $this->name,
             "type" =>  $this->account_type,
             "role" =>  $this->pivot->role

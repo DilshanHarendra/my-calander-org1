@@ -37,6 +37,17 @@ return [
 
     'connections' => [
 
+        \App\Models\Tenant\Account::class => [
+            'salt' => \App\Models\Tenant\Account::class.'7623e9b0009feff8e024a689d6ef59ce',
+            'length' => 10,
+        ],
+
+        \App\Models\Tenant\User::class => [
+            'salt' => \App\Models\Tenant\User::class.'7623e9b0009feff8e024a689d6ef59ce',
+            'length' => 10,
+        ],
+
+
         'main' => [
             'salt' => 'your-salt-string',
             'length' => 'your-length-integer',
