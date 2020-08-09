@@ -2,10 +2,12 @@
 
 
 namespace App\Http\Controllers\Api\V1\Calendar;
-use App\Calendar;
-use App\Repositories\Calendar\CalendarRepositoryInterface;
 
-class CalendarController
+use App\Http\Controllers\Api\V1\ApiController;
+use App\Repositories\Calendar\CalendarRepositoryInterface;
+use Illuminate\Http\Request;
+
+class CalendarController extends ApiController
 {
     private $calendarRepository;
 
