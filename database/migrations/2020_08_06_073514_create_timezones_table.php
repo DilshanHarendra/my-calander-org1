@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CalendarSubscribers extends Migration
+class CreateTimezonesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,9 @@ class CalendarSubscribers extends Migration
      */
     public function up()
     {
-        Schema::create('calendar_subscribers', function (Blueprint $table) {
+        Schema::create('timezones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email')->index();
-            $table->string('permission');
-
-            $table->unsignedBigInteger('calendar_id');
-            $table->dateTime('subscribed_at');
-
-            $table->foreign('calendar_id')->references('id')->on('calendars')->onDelete('cascade');
-            $table->timestamps();
+            $table->string('zone');
         });
     }
 
@@ -34,7 +27,7 @@ class CalendarSubscribers extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('calendar_subscribers');
+        Schema::dropIfExists('timezones');
         Schema::enableForeignKeyConstraints();
     }
 }

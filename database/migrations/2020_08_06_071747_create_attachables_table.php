@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Tags extends Migration
+class CreateAttachablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class Tags extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('title');
+        Schema::create('attachables', function (Blueprint $table) {
+            $table->unsignedBigInteger('file_id');
+
+            $table->string('attachable_id');
+            $table->string('attachable_type');
+
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -29,7 +33,8 @@ class Tags extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('files');
         Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('attachables');
     }
 }

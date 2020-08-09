@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Accounts extends Migration
+class CreateMetaTemplatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class Accounts extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('meta_templates', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('key');
+            $table->string('type');
 
+            $table->unsignedBigInteger('category_id');
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
-
     }
 
     /**
@@ -30,7 +33,7 @@ class Accounts extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('meta_templates');
         Schema::enableForeignKeyConstraints();
     }
 }

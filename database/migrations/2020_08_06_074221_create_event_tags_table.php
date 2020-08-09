@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EventInvitations extends Migration
+class CreateEventTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class EventInvitations extends Migration
      */
     public function up()
     {
-        Schema::create('event_invitations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('email')->index();
-
+        Schema::create('event_tags', function (Blueprint $table) {
             $table->unsignedBigInteger('event_id');
+            $table->unsignedBigInteger('tag_id');
 
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -32,7 +32,8 @@ class EventInvitations extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('event_invitations');
+        Schema::dropIfExists('tags');
         Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('event_tags');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Files extends Migration
+class CreateEventRegistrationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class Files extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('event_registrations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('path');
-            $table->string('title');
-            $table->string('type');
+            $table->string('name');
+            $table->string('rsvp');
+            $table->string('email')->index();
 
+            $table->unsignedBigInteger('event_id');
+
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,7 +34,7 @@ class Files extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('event_registrations');
         Schema::enableForeignKeyConstraints();
     }
 }

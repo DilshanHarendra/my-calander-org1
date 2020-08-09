@@ -6,7 +6,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EventMetas extends Migration
+
+
+class CreateAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +17,19 @@ class EventMetas extends Migration
      */
     public function up()
     {
-        Schema::create('event_metas', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key');
-            $table->string('value');
+            $table->text('full_address');
+            $table->string('street_1');
+            $table->string('street_2')->nullable()->default(null);
+            $table->string('city');
+            $table->string('province');
+            $table->string('country');
+            $table->string('longitude');
+            $table->string('latitude');
+            $table->string('addressable_id');
+            $table->string('addressable_type');
 
-            $table->unsignedBigInteger('event_id');
-
-            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -35,7 +42,7 @@ class EventMetas extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('event_metas');
+        Schema::dropIfExists('addresses');
         Schema::enableForeignKeyConstraints();
     }
 }

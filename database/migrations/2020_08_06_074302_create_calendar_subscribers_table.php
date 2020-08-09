@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MetaTemplates extends Migration
+class CreateCalendarSubscribersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class MetaTemplates extends Migration
      */
     public function up()
     {
-        Schema::create('meta_templates', function (Blueprint $table) {
+        Schema::create('calendar_subscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('key');
-            $table->string('type');
+            $table->string('email')->index();
+            $table->string('permission');
 
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('calendar_id');
+            $table->dateTime('subscribed_at');
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('calendar_id')->references('id')->on('calendars')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,7 +34,7 @@ class MetaTemplates extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('meta_templates');
+        Schema::dropIfExists('calendar_subscribers');
         Schema::enableForeignKeyConstraints();
     }
 }
