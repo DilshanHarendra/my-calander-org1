@@ -14,7 +14,7 @@ class AddFieldOnAccountsTable extends Migration
     public function up()
     {
         Schema::table('accounts', function (Blueprint $table) {
-            $table->unsignedInteger('account_type');
+            $table->unsignedTinyInteger('account_type');
         });
     }
 
