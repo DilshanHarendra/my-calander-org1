@@ -35,5 +35,6 @@ class AccountUser extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('calendar_subscribers');
         Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('account_users');
     }
 }

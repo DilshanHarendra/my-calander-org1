@@ -34,5 +34,6 @@ class EventTags extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('tags');
         Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('event_tags');
     }
 }

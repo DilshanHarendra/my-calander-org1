@@ -35,5 +35,6 @@ class Attachables extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('files');
         Schema::enableForeignKeyConstraints();
+        Schema::dropIfExists('attachables');
     }
 }

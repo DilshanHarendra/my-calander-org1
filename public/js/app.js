@@ -5398,11 +5398,7 @@ __webpack_require__.r(__webpack_exports__);
         return DATA_KEY$6;
       }
     }, {
-<<<<<<< HEAD
-      key: "Models.Event.Event",
-=======
       key: "Event",
->>>>>>> bc9d258bef54770495d95cc2878f8ece97995c2b
       get: function get() {
         return Event;
       }
@@ -5582,11 +5578,7 @@ __webpack_require__.r(__webpack_exports__);
         return DATA_KEY$7;
       }
     }, {
-<<<<<<< HEAD
-      key: "Models.Event.Event",
-=======
       key: "Event",
->>>>>>> bc9d258bef54770495d95cc2878f8ece97995c2b
       get: function get() {
         return Event$1;
       }
@@ -41953,11 +41945,7 @@ if (inBrowser && !isIE) {
   if (
     performance &&
     typeof performance.now === 'function' &&
-<<<<<<< HEAD
-    getNow() > document.createEvent('Models.Event.Event').timeStamp
-=======
     getNow() > document.createEvent('Event').timeStamp
->>>>>>> bc9d258bef54770495d95cc2878f8ece97995c2b
   ) {
     // if the event timestamp, although evaluated AFTER the Date.now(), is
     // smaller than it, it means the event is using a hi-res timestamp,
@@ -49900,8 +49888,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\o2o-calendar\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\o2o-calendar\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/yoosuf/Sites/o2o-calendar/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/yoosuf/Sites/o2o-calendar/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
