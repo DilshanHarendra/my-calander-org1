@@ -7,5 +7,13 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    //
+    /**
+     * @param Request $request
+     */
+    protected function current_tenant(Request $request)
+    {
+
+    }
+
+
 }

@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Account;
 
-use App\Account;
+
 
 
 class AccountRepository implements AccountRepositoryInterface
