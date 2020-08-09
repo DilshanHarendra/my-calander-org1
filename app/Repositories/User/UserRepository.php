@@ -4,8 +4,18 @@
 namespace App\Repositories\User;
 
 
+use App\Models\Tenant\User;
+use App\Repositories\Account\AccountRepositoryInterface;
+use Illuminate\Support\Facades\Hash;
+
 class UserRepository implements UserRepositoryInterface
 {
+    private $accountRepository;
+
+    public function __construct(AccountRepositoryInterface $accountRepository)
+    {
+        $this->accountRepository = $accountRepository;
+    }
 
     public function getAllData(array $request)
     {
@@ -29,7 +39,14 @@ class UserRepository implements UserRepositoryInterface
 
     public function createData(array $request)
     {
-        // TODO: Implement createData() method.
+        $user = new User();
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->save();
+        $account = $this->accountRepository->createData($request);
+        $user->account()->attach($account);
+        return $user;
     }
 
     public function updateData(int $id, array $request)

@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class RegisterController extends ApiController
 {
+    private $repository;
+
+    /**
+     * RegisterController constructor.
+     * @param UserRepositoryInterface $repository
+     */
+    public function __construct(UserRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
      * @param Request $request
@@ -18,11 +28,10 @@ class RegisterController extends ApiController
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'business_name' => ['required', 'string', 'max:255'],
-            'account_category' => [],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_category' => ['required'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
-
-
+        return $this->repository->createData($request->only('name', 'email', 'business_name', 'user_category', 'password'));
     }
 }

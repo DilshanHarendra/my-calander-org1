@@ -5,6 +5,8 @@ namespace App\Repositories\Account;
 
 
 
+use App\Models\Tenant\Account;
+
 class AccountRepository implements AccountRepositoryInterface
 {
 //    public function get($id){
@@ -50,7 +52,10 @@ class AccountRepository implements AccountRepositoryInterface
 
     public function createData(array $request)
     {
-        // TODO: Implement createData() method.
+        $account = new Account();
+        $account->name = $request['business_name'];
+        $account->account_type = $request['user_category'];
+        return $account->save();
     }
 
     public function updateData(int $id, array $request)

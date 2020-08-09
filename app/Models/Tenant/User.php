@@ -25,6 +25,6 @@ class User extends Authenticatable
     ];
 
     public function account(){ //check this
-        return $this->belongsTo(Account::class);
+        return $this->belongsToMany(Account::class)->withTimestamps();
     }
 }

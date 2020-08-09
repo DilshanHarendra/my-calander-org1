@@ -13,14 +13,19 @@ class CreateAccountUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('account_users', function (Blueprint $table) {
+        Schema::create('account_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('email')->index();
-            $table->string('role');
+//            $table->string('email')->index();
+
+            $table->unsignedBigInteger('user_id');
 
             $table->unsignedBigInteger('account_id');
 
+            $table->unsignedTinyInteger('role')->default(0);
+
             $table->foreign('account_id')->references('id')->on('accounts')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -35,6 +40,6 @@ class CreateAccountUserTable extends Migration
         Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('calendar_subscribers');
         Schema::enableForeignKeyConstraints();
-        Schema::dropIfExists('account_users');
+        Schema::dropIfExists('account_user');
     }
 }
