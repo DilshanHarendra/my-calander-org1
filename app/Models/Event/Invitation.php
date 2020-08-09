@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Event;
+namespace App\Models\Event;
 
-use App\Event;
 use Illuminate\Database\Eloquent\Model;
 
 class Invitation extends Model

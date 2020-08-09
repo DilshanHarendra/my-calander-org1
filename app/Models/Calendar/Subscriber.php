@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Calendar;
+namespace App\Models\Calendar;
 
-use App\Calendar;
 use Illuminate\Database\Eloquent\Model;
 
 class Subscriber extends Model

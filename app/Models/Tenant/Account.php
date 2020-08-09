@@ -1,7 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models\Tenant;
 
+use App\Models\Calendar\Calendar;
+use App\Models\Event\Event;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model

@@ -1,11 +1,12 @@
 <?php
 
 
-namespace App\Repositories\Account;
+namespace App\Repositories\User;
 
 
-interface AccountRepositoryInterface
+interface UserRepositoryInterface
 {
+
     public function getAllData(array $request);
 
     public function getPaginatedData(array $request);
@@ -19,5 +20,6 @@ interface AccountRepositoryInterface
     public function updateData(int $id, array $request);
 
     public function deleteData(int $id);
+
 
 }

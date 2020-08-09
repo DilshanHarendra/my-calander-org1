@@ -1,9 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models\Event;
 
-use App\Event\Invitation;
-use App\Event\Registration;
+use App\Models\Calendar\Calendar;
+use App\Models\Category;
+use App\Models\File;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
