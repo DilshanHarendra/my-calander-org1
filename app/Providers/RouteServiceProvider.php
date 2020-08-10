@@ -44,6 +44,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('user', function ($value, $route) {
             return $this->getModel(User::class, $value);
         });
+
+
     }
 
     /**

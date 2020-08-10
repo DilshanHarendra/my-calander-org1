@@ -62,7 +62,9 @@ class AccountRepository implements AccountRepositoryInterface
             $account->account_type = 1; // BusinessAccount
         }
 
-        return $account->save();
+        $account->save();
+
+        return $account;
     }
 
     public function updateData(int $id, array $request)
