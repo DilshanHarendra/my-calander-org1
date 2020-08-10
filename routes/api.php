@@ -25,6 +25,11 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
     Route::post('login', 'AuthController@login');
 
+    Route::post('password/reset', 'PasswordController@resetEmail');
+
+
+
+
     Route::get('me', 'ProfileController@selfProfile')->middleware('jwt_auth');
 
 

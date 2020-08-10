@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Enums\ErrorCodeType;
+use App\Http\Requests\Api\V1\LoginRequest;
 use App\Repositories\User\UserRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends ApiController
@@ -17,17 +18,11 @@ class AuthController extends ApiController
 
 
     /**
-     * @param Request $request
+     * @param LoginRequest $request
      * @return string
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $this->validate($request, [
-            'email'     => 'required|email',
-            'password'  => 'required'
-        ]);
-
         $user = $this->repository->getDataByKeyAndValue('email', $request->input('email'));
 
         if (!$user) {
@@ -36,8 +31,7 @@ class AuthController extends ApiController
             // different kind of responses. But let's return the
             // below response for now.
             return response()->json([
-                'error' => 'Email or password is wrong.',
-                'error_code' => '1001'
+                'error' => ErrorCodeType::fromValue(1010)
             ], 400);
         }
 
@@ -51,8 +45,7 @@ class AuthController extends ApiController
 
         // Bad Request response
         return response()->json([
-            'error' => 'Email or password is wrong.',
-            'error_code' => '1002'
+            'error' => ErrorCodeType::fromValue(1010)
         ], 400);
 
     }
