@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\Api\V1;
 
+use App\Enums\AccountRoleType;
+use App\Enums\AccountType;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AccountResource extends JsonResource
@@ -19,8 +21,8 @@ class AccountResource extends JsonResource
         return [
             "id" =>  $this->getRouteKey(),
             "name" => $this->name,
-            "type" =>  $this->account_type === 0 ? 'personal' : 'business',
-            "role" =>  $this->pivot->role === 0 ? 'owner' : 'user',
+            "category" =>  AccountType::fromValue($this->account_type),
+            "role" =>  AccountRoleType::fromValue($this->pivot->role),
         ];
     }
 }
