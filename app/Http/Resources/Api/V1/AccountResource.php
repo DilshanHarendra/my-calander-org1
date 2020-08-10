@@ -19,8 +19,8 @@ class AccountResource extends JsonResource
         return [
             "id" =>  $this->getRouteKey(),
             "name" => $this->name,
-            "type" =>  $this->account_type,
-            "role" =>  $this->pivot->role
+            "type" =>  $this->account_type === 0 ? 'personal' : 'business',
+            "role" =>  $this->pivot->role === 0 ? 'owner' : 'user',
         ];
     }
 }

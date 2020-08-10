@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\Api\V1\UserResource;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -32,6 +33,9 @@ class RegisterController extends ApiController
             'password' => ['required', 'string', 'min:8'],
         ]);
 
-        return $this->repository->createData($request->only('name', 'email', 'business_name', 'user_category', 'password'));
+        $user = $this->repository->createData($request->only('name', 'email', 'business_name', 'user_category', 'password'));
+
+        return new UserResource($user);
+
     }
 }
