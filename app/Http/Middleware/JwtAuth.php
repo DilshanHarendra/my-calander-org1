@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\ErrorCodeType;
 use App\Repositories\User\UserRepositoryInterface;
 use Closure;
 use Firebase\JWT\ExpiredException;
@@ -33,8 +34,7 @@ class JwtAuth
         if(!$cleanToken) {
             // Unauthorized response if token not there
             return response()->json([
-                'error' => 'Authorization token not provided.',
-                'error_code' => '1001',
+                'error' => ErrorCodeType::fromValue(1001),
             ], 401);
         }
 
@@ -43,11 +43,11 @@ class JwtAuth
             $credentials = JWT::decode($cleanToken, config('o2o.jwt_token'), ['HS256']);
         } catch(ExpiredException $e) {
             return response()->json([
-                'error' => 'Provided token is expired.'
+                'error' => ErrorCodeType::fromValue(1002),
             ], 400);
         } catch(\Exception $e) {
             return response()->json([
-                'error' => 'An error while decoding token.'
+                'error' => ErrorCodeType::fromValue(1003),
             ], 400);
         }
 
