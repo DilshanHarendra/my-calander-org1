@@ -58,4 +58,9 @@ class UserRepository implements UserRepositoryInterface
     {
         // TODO: Implement deleteData() method.
     }
+
+    public function resetEmail(array $request)
+    {
+        // implement email notification
+    }
 }

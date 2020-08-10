@@ -21,5 +21,7 @@ interface UserRepositoryInterface
 
     public function deleteData(int $id);
 
+    public function resetEmail(array $request);
+
 
 }

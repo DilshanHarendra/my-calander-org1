@@ -3,24 +3,33 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\ResetEmailRequest;
+use App\Http\Requests\Api\V1\ResetPasswordRequest;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PasswordController extends ApiController
 {
+    private $repository;
+
+    public function __construct(UserRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
     /**
-     * @param Request $request
+     * @param ResetEmailRequest $request
      */
-    public function forgotPassword(Request $request)
+    public function resetEmail(ResetEmailRequest $request)
     {
-
+        return $this->repository->resetEmail($request->validated());
     }
 
 
     /**
-     * @param Request $request
+     * @param ResetPasswordRequest $request
      */
-    public function changePassword(Request $request)
+    public function resetPassword(ResetPasswordRequest $request)
     {
 
     }
