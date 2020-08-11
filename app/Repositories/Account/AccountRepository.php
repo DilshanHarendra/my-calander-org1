@@ -41,10 +41,10 @@ class AccountRepository implements AccountRepositoryInterface
 
         if ($request['user_category'] === 0) {
             $account->name = $request['name']; // gets user name from request
-            $account->account_type = AccountType::getKey(0); // PersonalAccount
+            $account->account_type = AccountType::PersonalAccount; // PersonalAccount
         } else {
             $account->name = $request['business_name'];
-            $account->account_type = AccountType::getKey(1); // BusinessAccount
+            $account->account_type = AccountType::BusinessAccount; // BusinessAccount
         }
 
         $account->save();
