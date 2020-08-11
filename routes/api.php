@@ -18,24 +18,33 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//
+//
+//Route::post('login', 'AuthController@login');
+//Route::post('logout', 'AuthController@logout');
+//Route::post('refresh', 'AuthController@refresh');
+//Route::post('me', 'AuthController@me');
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
+
+Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']], function () {
 
     Route::post('register', 'RegisterController@register');
 
     Route::post('login', 'AuthController@login');
 
-    Route::post('password/reset', 'PasswordController@resetEmail');
+    Route::post('logout', 'AuthController@logout');
+
+    Route::post('refresh', 'AuthController@refresh');
+
+    Route::get('me', 'AuthController@me');
 
 
+//    Route::post('password/reset', 'PasswordController@resetEmail');
 
 
-    Route::get('me', 'ProfileController@selfProfile')->middleware('jwt_auth');
+    Route::group(['prefix' => '{account}'], function () {
 
-
-    Route::group(['prefix' => '{account}', 'middleware' => ['jwt_auth']], function () {
-
-        Route::get('/', 'TestController@index'); // TEST
+        Route::post('/', 'TestController@index'); // TEST
 
         // PLACE REST OF THE ROUTES WHICH SUPPOSE TO BE UNDER ACCOUNT ROUTE
 

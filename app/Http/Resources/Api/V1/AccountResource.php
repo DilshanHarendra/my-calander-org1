@@ -22,7 +22,6 @@ class AccountResource extends JsonResource
             "id" =>  $this->getRouteKey(),
             "name" => $this->name,
             "category" =>  AccountType::fromValue($this->account_type),
-            "role" =>  AccountRoleType::fromValue($this->pivot->role),
         ];
     }
 }

@@ -38,12 +38,12 @@ return [
     'connections' => [
 
         \App\Models\Tenant\Account::class => [
-            'salt' => \App\Models\Tenant\Account::class.'7623e9b0009feff8e024a689d6ef59ce',
+            'salt' => \App\Models\Tenant\Account::class. config('o2o.hashids'),
             'length' => 10,
         ],
 
         \App\Models\Tenant\User::class => [
-            'salt' => \App\Models\Tenant\User::class.'7623e9b0009feff8e024a689d6ef59ce',
+            'salt' => \App\Models\Tenant\User::class. config('o2o.hashids'),
             'length' => 10,
         ],
 

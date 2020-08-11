@@ -10,7 +10,7 @@ interface AccountRepositoryInterface
 
     public function getPaginatedData(array $request);
 
-    public function getDataById(int $id);
+    public function getDataById($hashKey);
 
     public function getDataByKeyAndValue($key, $value);
 

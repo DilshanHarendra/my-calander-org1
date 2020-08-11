@@ -14,6 +14,8 @@ return [
     |
     */
 
-    'jwt_token' => env('JWT_SECRET')
+    'jwt_token' => env('JWT_SECRET'),
+
+    'hashids' => env('HASH_IDS')
 
 ];
