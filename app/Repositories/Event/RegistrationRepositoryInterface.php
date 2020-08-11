@@ -6,18 +6,18 @@ namespace App\Repositories\Event;
 
 interface RegistrationRepositoryInterface
 {
-    public function getAll();
+    public function getAllData();
 
-    public function getPaginated(array $requestData);
+    public function getPaginatedData(array $requestData);
 
-    public function get($id);
+    public function getDataById($id);
 
-    public function getByEvent($email);
+    public function getDataByEvent($event);
 
-    public function create(array $requestData);
+    public function createData(array $requestData);
 
-    public function update(array $requestData, $id);
+    public function updateData(array $requestData, $id);
 
-    public function delete($id);
+    public function deleteData($id);
 
 }

@@ -17,7 +17,5 @@ class ProfileController extends Controller
     public function selfProfile(Request $request)
     {
         return new UserResource($request->auth);
-
-
     }
 }

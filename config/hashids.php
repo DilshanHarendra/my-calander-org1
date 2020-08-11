@@ -47,17 +47,6 @@ return [
             'length' => 10,
         ],
 
-
-        'main' => [
-            'salt' => 'your-salt-string',
-            'length' => 'your-length-integer',
-        ],
-
-        'alternative' => [
-            'salt' => 'your-salt-string',
-            'length' => 'your-length-integer',
-        ],
-
     ],
 
 ];

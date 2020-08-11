@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Calendar\Calendar;
 use App\Models\Tenant\Account;
 use App\Models\Tenant\User;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -44,7 +45,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('user', function ($value, $route) {
             return $this->getModel(User::class, $value);
         });
-
 
     }
 

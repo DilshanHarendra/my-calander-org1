@@ -3,7 +3,6 @@
 
 namespace App\Repositories\User;
 
-
 use App\Models\Tenant\User;
 use App\Repositories\Account\AccountRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
@@ -51,12 +50,15 @@ class UserRepository implements UserRepositoryInterface
 
     public function updateData(int $id, array $request)
     {
-        // TODO: Implement updateData() method.
+        $entity = $this->getDataById($id);
+        $entity->update($request);
+        return $entity;
     }
 
     public function deleteData(int $id)
     {
-        // TODO: Implement deleteData() method.
+        $entity = $this->getDataById($id);
+        return $entity->delete();
     }
 
     public function resetEmail(array $request)

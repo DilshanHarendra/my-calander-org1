@@ -1,23 +1,24 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\V1\Calendar;
+namespace App\Http\Controllers\Api\V1\Event;
 
 use App\Http\Controllers\Api\V1\ApiController;
-use App\Http\Requests\Calendar\CreateCalendarRequest;
-use App\Http\Requests\Calendar\UpdateCalendarRequest;
+use App\Http\Requests\Event\CreateEventRequest;
+use App\Http\Requests\Event\UpdateEventRequest;
 use App\Http\Resources\Api\V1\CalendarResource;
-use App\Repositories\Calendar\CalendarRepositoryInterface;
+use App\Http\Resources\Api\V1\EventResource;
+use App\Repositories\Event\EventRepositoryInterface;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class CalendarController extends ApiController
+class EventController extends ApiController
 {
     //created =>204
     //delete => 202
     private $repository;
 
-    public function __construct(CalendarRepositoryInterface $repository)
+    public function __construct(EventRepositoryInterface $repository)
     {
         $this->middleware('jwt_auth');
         $this->repository = $repository;
@@ -25,15 +26,14 @@ class CalendarController extends ApiController
 
     public function index()
     {
-        return CalendarResource::collection($this->repository->getAllData()); //TODO : make it by owner email
+        return EventResource::collection($this->repository->getAllData()); //TODO : make it by owner email
     }
 
     public function show($account,$id)
     {
         try{
-
-            $calendar = $this->repository->getDataById($id);
-            return new CalendarResource($calendar);
+            $event = $this->repository->getDataById($id);
+            return new EventResource($event);
         }
         catch(ModelNotFoundException $e)
         {
@@ -45,17 +45,17 @@ class CalendarController extends ApiController
         }
     }
 
-    public function store(CreateCalendarRequest $request)
+    public function store(CreateEventRequest $request)
     {
-        $calendar = $this->repository->createData($request->validated());
-        return new CalendarResource($calendar);
+        $event = $this->repository->createData($request->validated());
+        return new EventResource($event);
     }
 
-    public function update(UpdateCalendarRequest $request,$account,$id)
+    public function update(UpdateEventRequest $request,$account,$id)
     {
         try {
-            $calendar = $this->repository->updateData($request->validated(), $id);
-            return new CalendarResource($calendar);
+            $event = $this->repository->updateData($request->validated(),$id);
+            return new EventResource($event);
         }
         catch(ModelNotFoundException $e)
         {
@@ -72,7 +72,7 @@ class CalendarController extends ApiController
         try{
 
             $this->repository->deleteData($id);
-            return response()->json(['message'=> 'SUCCESS'],200);
+            return response()->json(['message'=> 'SUCCESS'],204);
         }
         catch(ModelNotFoundException $e)
         {

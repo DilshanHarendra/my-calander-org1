@@ -2,11 +2,9 @@
 
 namespace App\Repositories\Account;
 
-
-
-
 use App\Enums\AccountType;
 use App\Models\Tenant\Account;
+
 
 class AccountRepository implements AccountRepositoryInterface
 {
@@ -20,29 +18,27 @@ class AccountRepository implements AccountRepositoryInterface
 
     public function getAllData(array $request)
     {
-        // TODO: Implement getAllData() method.
+        return Account::get();
     }
 
     public function getPaginatedData(array $request)
     {
-        // TODO: Implement getPaginatedData() method.
+        $limit  = isset($request['per_page']) ? $request['per_page'] : 10;
+        return Account::paginate($limit);
     }
 
     public function getDataById($hashKey)
     {
-//        return $hashKey;
-//        return $hashKey;
-//        return Account->get($hashKey);
 
+        return Account::findOrFail($id);
         return $this->entity->getRouteKey($hashKey);
 
     }
 
     public function getDataByKeyAndValue($key, $value)
     {
-        // TODO: Implement getDataByKeyAndValue() method.
+        return Account::where($key, $value)->first();
     }
-
 
     /**
      * @param array $request
@@ -67,11 +63,14 @@ class AccountRepository implements AccountRepositoryInterface
 
     public function updateData(int $id, array $request)
     {
-        // TODO: Implement updateData() method.
+        $entity = $this->getDataById($id);
+        $entity->update($request);
+        return $entity;
     }
 
     public function deleteData(int $id)
     {
-        // TODO: Implement deleteData() method.
+        $entity = $this->getDataById($id);
+        return $entity->delete();
     }
 }

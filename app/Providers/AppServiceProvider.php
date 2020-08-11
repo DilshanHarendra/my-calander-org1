@@ -13,7 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         $this->app->bind(
             'App\Repositories\Account\AccountRepositoryInterface',
             'App\Repositories\Account\AccountRepository');
@@ -21,6 +20,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\User\UserRepositoryInterface',
             'App\Repositories\User\UserRepository');
+
+        $this->app->bind(
+            'App\Repositories\Calendar\CalendarRepositoryInterface',
+            'App\Repositories\Calendar\CalendarRepository');
+
+        $this->app->bind(
+            'App\Repositories\Event\EventRepositoryInterface',
+            'App\Repositories\Event\EventRepository');
+
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace App\Models\Calendar;
 
-
 use App\Models\Event\Event;
 use App\Models\Tenant\Account;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +15,10 @@ class Calendar extends Model
         'description',
         'time_zone',
         'first_day',
+        'owner_email',
+        'type',
+        'accounts_id',
+
     ];
 
     protected $casts = [

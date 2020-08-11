@@ -11,6 +11,6 @@ use BenSampo\Enum\Enum;
  */
 final class CalendarType extends Enum
 {
-    const NormalCalendar =   0;
-    const GoogleCalendar =   1;
+    public const NormalCalendar =   0;
+    public const GoogleCalendar =   1;
 }

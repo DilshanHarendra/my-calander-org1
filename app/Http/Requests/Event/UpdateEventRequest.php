@@ -26,9 +26,10 @@ class UpdateEventRequest extends FormRequest
         return [
             'title' => ['required','string','max:255'],
             'description' => ['required', 'string'],
-            'time_zone' => ['required', 'string','max:255'],
+            'timezone' => ['required', 'string','max:255'],
             'start_at' => ['required', 'date_format:Y-m-d H:i','after:today'],
             'end_at' => ['required', 'date_format:Y-m-d H:i','after:start_at'],
+            'all_day' => ['in:0,1'],
         ];
 
     }

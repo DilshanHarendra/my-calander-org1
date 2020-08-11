@@ -16,6 +16,12 @@ class Event extends Model
         'title',
         'description',
         'timezone',
+        'start_at',
+        'end_at',
+        'creator_email',
+        'calendar_id',
+        'category_id',
+        'all_day',
     ];
 
     protected $dates = [

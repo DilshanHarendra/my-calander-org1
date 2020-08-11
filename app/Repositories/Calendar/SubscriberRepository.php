@@ -2,46 +2,46 @@
 
 namespace App\Repositories\Calendar;
 
-use App\Calendar\Subscriber;
+use App\Models\Calendar\Subscriber;
 
 class SubscriberRepository implements SubscriberRepositoryInterface
 {
-    public function getAll()
+    public function getAllData()
     {
         return Subscriber::get();
     }
 
-    public function getPaginated(array $requestData)
+    public function getPaginatedData(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
         return Subscriber::paginate($limit);
     }
 
-    public function get($id)
+    public function getDataById($id)
     {
         return Subscriber::findorfail($id);
     }
 
-    public function getByCalendar($calendar)
+    public function getDataByCalendar($calendar)
     {
         return Subscriber::where('calendar_id',$calendar->id)->get();
     }
 
-    public function create(array $requestData)
+    public function createData(array $requestData)
     {
         return Subscriber::create($requestData);
     }
 
-    public function update(array $requestData, $id)
+    public function updateData(array $requestData, $id)
     {
-        $entity = $this->get($id);
+        $entity = $this->getDataById($id);
         $entity->update($requestData);
         return $entity;
     }
 
-    public function delete($id)
+    public function deleteData($id)
     {
-        $entity = $this->get($id);
+        $entity = $this->getDataById($id);
         return $entity->delete();
     }
 

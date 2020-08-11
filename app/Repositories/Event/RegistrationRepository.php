@@ -2,46 +2,46 @@
 
 namespace App\Repositories\Event;
 
-use App\Event\Registration;
+use App\Models\Event\Registration;
 
 class RegistrationRepository implements RegistrationRepositoryInterface
 {
-    public function getAll()
+    public function getAllData()
     {
         return Registration::get();
     }
 
-    public function getPaginated(array $requestData)
+    public function getPaginatedData(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
         return Registration::paginate($limit);
     }
 
-    public function get($id)
+    public function getDataById($id)
     {
         return Registration::findorfail($id);
     }
 
-    public function getByEvent($event)
+    public function getDataByEvent($event)
     {
         return Registration::where('event_id',$event->id)->get();
     }
 
-    public function create(array $requestData)
+    public function createData(array $requestData)
     {
         return Registration::create($requestData);
     }
 
-    public function update(array $requestData, $id)
+    public function updateData(array $requestData, $id)
     {
-        $entity = $this->get($id);
+        $entity = $this->getDataById($id);
         $entity->update($requestData);
         return $entity;
     }
 
-    public function delete($id)
+    public function deleteData($id)
     {
-        $entity = $this->get($id);
+        $entity = $this->getDataById($id);
         return $entity->delete();
     }
 

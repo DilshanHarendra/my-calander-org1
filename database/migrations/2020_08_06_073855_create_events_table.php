@@ -32,12 +32,12 @@ class CreateEventsTable extends Migration
 
             $table->string('creator_email')->index();
 
-            $table->unsignedBigInteger('cover_image_id');
+            $table->unsignedBigInteger('cover_image_id')->nullable()->default(null);
             $table->unsignedBigInteger('calendar_id');
             $table->unsignedBigInteger('category_id');
 
             $table->foreign('calendar_id')->references('id')->on('calendars')->onDelete('cascade');
-            $table->foreign('cover_image_id')->references('id')->on('files')->onDelete('cascade');
+            $table->foreign('cover_image_id')->references('id')->on('files')->onDelete('set null');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
