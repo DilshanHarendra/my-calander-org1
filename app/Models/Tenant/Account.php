@@ -9,9 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-
     use Hashidable;
-
 
     protected $table = 'accounts';
 
@@ -29,7 +27,4 @@ class Account extends Model
     {
         return $this->hasManyThrough(Event::class,Calendar::class);
     }
-
-
-
 }

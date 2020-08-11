@@ -10,6 +10,14 @@ use App\Models\Tenant\Account;
 
 class AccountRepository implements AccountRepositoryInterface
 {
+    private $entity;
+
+    public function __construct(Account $entity)
+    {
+        $this->entity = $entity;
+    }
+
+
     public function getAllData(array $request)
     {
         // TODO: Implement getAllData() method.
@@ -20,9 +28,14 @@ class AccountRepository implements AccountRepositoryInterface
         // TODO: Implement getPaginatedData() method.
     }
 
-    public function getDataById(int $id)
+    public function getDataById($hashKey)
     {
-        // TODO: Implement getDataById() method.
+//        return $hashKey;
+//        return $hashKey;
+//        return Account->get($hashKey);
+
+        return $this->entity->getRouteKey($hashKey);
+
     }
 
     public function getDataByKeyAndValue($key, $value)
