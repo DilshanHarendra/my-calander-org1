@@ -19,7 +19,7 @@ class CreateCalendarSubscribersTable extends Migration
             $table->string('permission');
 
             $table->unsignedBigInteger('calendar_id');
-            $table->dateTime('subscribed_at');
+            $table->dateTime('subscribed_at')->default(now());
 
             $table->foreign('calendar_id')->references('id')->on('calendars')->onDelete('cascade');
             $table->timestamps();

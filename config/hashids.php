@@ -47,6 +47,16 @@ return [
             'length' => 10,
         ],
 
+        \App\Models\Event\Event::class => [
+            'salt' =>  \App\Models\Event\Event::class. config('o2o.hashids'),
+            'length' => 10,
+        ],
+
+        \App\Models\Calendar\Calendar::class => [
+            'salt' =>  \App\Models\Calendar\Calendar::class. config('o2o.hashids'),
+            'length' => 10,
+        ],
+
     ],
 
 ];

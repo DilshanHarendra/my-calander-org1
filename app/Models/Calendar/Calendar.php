@@ -4,10 +4,12 @@ namespace App\Models\Calendar;
 
 use App\Models\Event\Event;
 use App\Models\Tenant\Account;
+use App\Traits\Hashidable;
 use Illuminate\Database\Eloquent\Model;
 
 class Calendar extends Model
 {
+    use Hashidable;
     protected $table = 'calendars';
 
     protected $fillable = [

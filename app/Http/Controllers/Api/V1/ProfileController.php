@@ -11,11 +11,11 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        $this->middleware('jwt_auth');
+        $this->middleware('auth:api');
     }
 
     public function selfProfile(Request $request)
     {
-        return new UserResource($request->auth);
+        return new UserResource(current_user());
     }
 }

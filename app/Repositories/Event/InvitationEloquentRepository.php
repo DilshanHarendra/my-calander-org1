@@ -2,6 +2,9 @@
 
 namespace App\Repositories\Event;
 
+
+use App\Jobs\SendEmailJob;
+use App\Mail\InviteUserToEvent;
 use App\Models\Event\Invitation;
 
 class InvitationEloquentRepository implements InvitationRepositoryInterface
@@ -27,16 +30,19 @@ class InvitationEloquentRepository implements InvitationRepositoryInterface
         return Invitation::where('event_id',$event->id)->get();
     }
 
-    public function createData(array $requestData)
+    public function createData(array $requestData,$event)
     {
-        return Invitation::create($requestData);
-    }
-
-    public function updateData(array $requestData, $id)
-    {
-        $entity = $this->getDataById($id);
-        $entity->update($requestData);
-        return $entity;
+        if($event->invitations()->where('email',$requestData['email'])->count() == 0)
+        {
+             if($event->invitations()->create($requestData))
+             {
+                 SendEmailJob::dispatch($requestData['email'],new InviteUserToEvent($event));
+             }
+        }
+        else
+        {
+            throw new \Exception('User already invited to event');
+        }
     }
 
     public function deleteData($id)

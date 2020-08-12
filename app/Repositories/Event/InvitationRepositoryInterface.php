@@ -12,9 +12,7 @@ interface InvitationRepositoryInterface
 
     public function getDataByEvent($event);
 
-    public function createData(array $requestData);
-
-    public function updateData(array $requestData, $id);
+    public function createData(array $requestData,$event);
 
     public function deleteData($id);
 

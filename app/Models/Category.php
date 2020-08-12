@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Event\Event;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -16,4 +17,9 @@ class Category extends Model
    {
        return $this->hasMany(MetaTemplate::class);
    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

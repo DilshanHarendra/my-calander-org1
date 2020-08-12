@@ -3,6 +3,7 @@
 namespace App\Repositories\Event;
 
 use App\Enums\CalendarType;
+use App\Models\Category;
 use App\Models\Event\Event;
 
 class EventEloquentRepository implements EventRepositoryInterface
@@ -30,10 +31,10 @@ class EventEloquentRepository implements EventRepositoryInterface
 
     public function createData(array $requestData)
     {
-        $requestData['creator_email'] ='shehan@digitalmediasolutions.com.au';
-        $requestData['calendar_id'] = 1;
-        $requestData['category_id'] = 1;
+        $requestData['creator_email'] = current_user()->email;
         $requestData['cover_image_id'] = null;
+        $category = Category::find($requestData['category_id']);
+
         return Event::create($requestData);
     }
 

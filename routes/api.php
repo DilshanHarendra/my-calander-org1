@@ -40,20 +40,38 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
         Route::group(['prefix' => 'calendars', 'namespace'=>'Calendar'], function () {
 
             Route::get('/', 'CalendarController@index');
-            Route::get('/{id}', 'CalendarController@show');
+            Route::get('/{calendar}', 'CalendarController@show');
             Route::post('/', 'CalendarController@store');
-            Route::put('/{id}', 'CalendarController@update');
-            Route::delete('/{id}', 'CalendarController@delete');
+            Route::put('/{calendar}', 'CalendarController@update');
+            Route::delete('/{calendar}', 'CalendarController@delete');
 
+            //calendar-subscribers
+            Route::group(['prefix' => '/{calendar}/subscribers'], function () {
+                Route::get('/', 'SubscriptionController@calender_subscribers');
+                Route::post('/', 'SubscriptionController@subscribe');
+                Route::delete('/', 'SubscriptionController@delete');
+            });
         });
 
         //event
         Route::group(['prefix' => 'events', 'namespace'=>'Event'], function () {
             Route::get('/', 'EventController@index');
-            Route::get('/{id}', 'EventController@show');
+            Route::get('/{event}', 'EventController@show');
             Route::post('/', 'EventController@store');
-            Route::put('/{id}', 'EventController@update');
-            Route::delete('/{id}', 'EventController@delete');
+            Route::put('/{event}', 'EventController@update');
+            Route::delete('/{event}', 'EventController@delete');
+
+            //event-invites
+            Route::group(['prefix' => '/{event}/invites'], function () {
+                Route::get('/', 'InvitationController@event_invites');
+                Route::post('/', 'InvitationController@invite');
+            });
+
+            //event-registrations
+            Route::group(['prefix' => '/{event}/registrations'], function () {
+                Route::get('/', 'RegistrationController@event_registrations');
+                Route::post('/', 'RegistrationController@register');
+            });
 
         });
     });

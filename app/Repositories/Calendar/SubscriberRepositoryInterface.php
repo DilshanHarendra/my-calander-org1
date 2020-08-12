@@ -10,12 +10,10 @@ interface SubscriberRepositoryInterface
 
     public function getDataById($id);
 
-    public function getDataByCalendar($email);
+    public function getDataByCalendar($calendar);
 
-    public function createData(array $requestData);
+    public function createData(array $requestData,$calendar);
 
-    public function updateData(array $requestData, $id);
-
-    public function deleteData($id);
+    public function deleteData(array $requestData,$calendar);
 
 }
