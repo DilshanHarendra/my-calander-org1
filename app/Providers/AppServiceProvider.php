@@ -26,12 +26,21 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Calendar\CalendarEloquentRepository');
 
         $this->app->bind(
+            'App\Repositories\Calendar\SubscriberRepositoryInterface',
+            'App\Repositories\Calendar\SubscriberEloquentRepository');
+
+
+        $this->app->bind(
             'App\Repositories\Event\EventRepositoryInterface',
             'App\Repositories\Event\EventEloquentRepository');
 
         $this->app->bind(
             'App\Repositories\Event\InvitationRepositoryInterface',
             'App\Repositories\Event\InvitationEloquentRepository');
+
+        $this->app->bind(
+            'App\Repositories\Event\RegistrationRepositoryInterface',
+            'App\Repositories\Event\RegistrationEloquentRepository');
 
     }
 

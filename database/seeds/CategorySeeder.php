@@ -13,25 +13,23 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $onlineCategory = Category::create([
-            'title'=> 'online'
+        $exhibitionCategory = Category::create([
+            'title'=> 'exhibition'
         ]);
 
-        $offlineCategory = Category::create([
-            'title'=> 'offline'
+        $tradeCategory = Category::create([
+            'title'=> 'tradeshow'
         ]);
 
+        $conferenceCateogry = Category::create([
+            'title'=> 'conference'
+        ]);
 
         $categoryMetas = [
             [
-                'category' => $onlineCategory,
-                'key' => 'html_link',
+                'category' => $exhibitionCategory,
+                'key' => 'ticketing_link',
                 'type' => 'link',
-            ],
-            [
-                'category' => $offlineCategory,
-                'key' => 'location',
-                'type' => 'address',
             ],
         ];
 

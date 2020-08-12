@@ -14,6 +14,7 @@ class PasswordController extends ApiController
 
     public function __construct(UserRepositoryInterface $repository)
     {
+        $this->middleware('auth:api');
         $this->repository = $repository;
     }
 

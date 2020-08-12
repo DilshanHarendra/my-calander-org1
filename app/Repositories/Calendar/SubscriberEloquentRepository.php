@@ -2,7 +2,11 @@
 
 namespace App\Repositories\Calendar;
 
+use App\Jobs\SendEmailJob;
+use App\Mail\InviteUserToEvent;
 use App\Models\Calendar\Subscriber;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class SubscriberEloquentRepository implements SubscriberRepositoryInterface
 {
@@ -27,22 +31,30 @@ class SubscriberEloquentRepository implements SubscriberRepositoryInterface
         return Subscriber::where('calendar_id',$calendar->id)->get();
     }
 
-    public function createData(array $requestData)
+    public function createData(array $requestData, $calendar)
     {
-        return Subscriber::create($requestData);
+        if($calendar->subscribers()->where('email',$requestData['email'])->count() == 0)
+        {
+            $calendar->subscribers()->create($requestData);
+        }
+        else
+        {
+            throw new \Exception('User already subscribed to calendar');
+        }
     }
 
-    public function updateData(array $requestData, $id)
+    public function deleteData(array $requestData, $calendar)
     {
-        $entity = $this->getDataById($id);
-        $entity->update($requestData);
-        return $entity;
-    }
+        if($calendar->subscribers()->where('email',$requestData['email'])->count() == 1)
+        {
+            $subscription = $calendar->subscribers()->where('email',$requestData['email']);
+            return $subscription->delete();
+        }
+        else
+        {
+            throw new ModelNotFoundException();
+        }
 
-    public function deleteData($id)
-    {
-        $entity = $this->getDataById($id);
-        return $entity->delete();
     }
 
 

@@ -2,6 +2,9 @@
 
 namespace App\Repositories\Event;
 
+use App\Jobs\SendEmailJob;
+use App\Mail\InviteUserToEvent;
+use App\Mail\UserRegisteredForEvent;
 use App\Models\Event\Registration;
 
 class RegistrationEloquentRepository implements RegistrationRepositoryInterface
@@ -27,22 +30,19 @@ class RegistrationEloquentRepository implements RegistrationRepositoryInterface
         return Registration::where('event_id',$event->id)->get();
     }
 
-    public function createData(array $requestData)
+    public function createData(array $requestData,$event)
     {
-        return Registration::create($requestData);
-    }
-
-    public function updateData(array $requestData, $id)
-    {
-        $entity = $this->getDataById($id);
-        $entity->update($requestData);
-        return $entity;
-    }
-
-    public function deleteData($id)
-    {
-        $entity = $this->getDataById($id);
-        return $entity->delete();
+        if($event->registrations()->where('email',$requestData['email'])->count() == 0)
+        {
+            if($event->registrations()->create($requestData))
+            {
+                SendEmailJob::dispatch($requestData['email'],new UserRegisteredForEvent($event));
+            }
+        }
+        else
+        {
+            throw new \Exception('User already registered to event');
+        }
     }
 
 }

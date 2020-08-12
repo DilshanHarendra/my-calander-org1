@@ -4,9 +4,8 @@
 namespace App\Http\Controllers\Api\V1\Event;
 
 use App\Http\Controllers\Api\V1\ApiController;
-use App\Http\Requests\Event\CreateEventRequest;
-use App\Http\Requests\Event\UpdateEventRequest;
-use App\Http\Resources\Api\V1\CalendarResource;
+use App\Http\Requests\Api\V1\Event\CreateEventRequest;
+use App\Http\Requests\Api\V1\Event\UpdateEventRequest;
 use App\Http\Resources\Api\V1\EventResource;
 use App\Repositories\Event\EventRepositoryInterface;
 use Exception;
@@ -18,6 +17,7 @@ class EventController extends ApiController
 
     public function __construct(EventRepositoryInterface $repository)
     {
+        $this->middleware('auth:api');
         $this->repository = $repository;
     }
 
@@ -26,10 +26,10 @@ class EventController extends ApiController
         return EventResource::collection($this->repository->getAllData()); //TODO : make it by owner email
     }
 
-    public function show($account,$id)
+    public function show($account,$event)
     {
         try{
-            $event = $this->repository->getDataById($id);
+
             return new EventResource($event);
         }
         catch(ModelNotFoundException $e)
@@ -42,16 +42,27 @@ class EventController extends ApiController
         }
     }
 
+    /**
+     * Create a new event
+     *
+     * @return EventResource
+     */
     public function store(CreateEventRequest $request)
     {
         $event = $this->repository->createData($request->validated());
         return new EventResource($event);
     }
 
-    public function update(UpdateEventRequest $request,$account,$id)
+    /**
+     * Update event
+     * Category cannot be changed
+     *
+     * @return EventResource
+     */
+    public function update(UpdateEventRequest $request,$account,$event)
     {
         try {
-            $event = $this->repository->updateData($request->validated(),$id);
+            $event = $this->repository->updateData($request->validated(),$event->id);
             return new EventResource($event);
         }
         catch(ModelNotFoundException $e)
@@ -64,11 +75,11 @@ class EventController extends ApiController
         }
     }
 
-    public function delete($account,$id)
+    public function delete($account,$event)
     {
         try{
 
-            $this->repository->deleteData($id);
+            $this->repository->deleteData($event->id);
             return response()->json(['message'=> 'SUCCESS'],204);
         }
         catch(ModelNotFoundException $e)

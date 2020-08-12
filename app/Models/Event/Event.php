@@ -6,10 +6,12 @@ use App\Models\Calendar\Calendar;
 use App\Models\Category;
 use App\Models\File;
 use App\Models\Tag;
+use App\Traits\Hashidable;
 use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    use Hashidable;
     protected $table = "events";
 
     protected $fillable = [
@@ -41,7 +43,7 @@ class Event extends Model
 
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function calendar()

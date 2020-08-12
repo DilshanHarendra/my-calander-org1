@@ -4,8 +4,8 @@
 namespace App\Http\Controllers\Api\V1\Calendar;
 
 use App\Http\Controllers\Api\V1\ApiController;
-use App\Http\Requests\Calendar\CreateCalendarRequest;
-use App\Http\Requests\Calendar\UpdateCalendarRequest;
+use App\Http\Requests\Api\V1\Calendar\CreateCalendarRequest;
+use App\Http\Requests\Api\V1\Calendar\UpdateCalendarRequest;
 use App\Http\Resources\Api\V1\CalendarResource;
 use App\Repositories\Calendar\CalendarRepositoryInterface;
 use Exception;
@@ -17,6 +17,7 @@ class CalendarController extends ApiController
 
     public function __construct(CalendarRepositoryInterface $repository)
     {
+        $this->middleware('auth:api');
         $this->repository = $repository;
     }
 
