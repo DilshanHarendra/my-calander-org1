@@ -31,6 +31,16 @@ class Account extends Model
         'password', 'remember_token',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'trial_ends_at',
+    ];
+
+
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps();

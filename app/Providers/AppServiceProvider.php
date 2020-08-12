@@ -22,6 +22,10 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Account\AccountEloquentRepository');
 
         $this->app->bind(
+            'App\Repositories\Payment\PaymentRepositoryInterface',
+            'App\Repositories\Payment\PaymentEloquentRepository');
+
+        $this->app->bind(
             'App\Repositories\User\UserRepositoryInterface',
             'App\Repositories\User\UserEloquentRepository');
 

@@ -36,6 +36,16 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
     Route::group(['prefix' => '{account}'], function () {
 
         Route::get('/', 'TestController@index'); // TEST
+
+        //Payments
+        Route::group(['namespace'=>'Tenant'], function () {
+            Route::get('payments', 'PaymentsController@index');
+            Route::post('payments', 'PaymentsController@store');
+            Route::put('subscription', 'API\UserController@updateSubscription');
+            Route::delete('payments/{id}', 'PaymentsController@destory');
+        });
+
+
         //calendar
         Route::group(['prefix' => 'calendars', 'namespace'=>'Calendar'], function () {
 
