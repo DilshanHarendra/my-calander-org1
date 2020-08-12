@@ -14,18 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-//
-//
-//Route::post('login', 'AuthController@login');
-//Route::post('logout', 'AuthController@logout');
-//Route::post('refresh', 'AuthController@refresh');
-//Route::post('me', 'AuthController@me');
-
-
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']], function () {
 
     Route::post('register', 'RegisterController@register');
@@ -36,8 +24,18 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
     Route::group(['prefix' => '{account}'], function () {
 
         Route::get('/', 'TestController@index'); // TEST
+
+        //Payments
+        Route::group(['namespace' => 'Tenant'], function () {
+            Route::get('payments', 'PaymentsController@index');
+            Route::post('payments', 'PaymentsController@store');
+            Route::put('subscription', 'API\UserController@updateSubscription');
+            Route::delete('payments/{id}', 'PaymentsController@destory');
+        });
+
+
         //calendar
-        Route::group(['prefix' => 'calendars', 'namespace'=>'Calendar'], function () {
+        Route::group(['prefix' => 'calendars', 'namespace' => 'Calendar'], function () {
 
             Route::get('/', 'CalendarController@index');
             Route::get('/{calendar}', 'CalendarController@show');
@@ -54,7 +52,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
         });
 
         //event
-        Route::group(['prefix' => 'events', 'namespace'=>'Event'], function () {
+        Route::group(['prefix' => 'events', 'namespace' => 'Event'], function () {
             Route::get('/', 'EventController@index');
             Route::get('/{event}', 'EventController@show');
             Route::post('/', 'EventController@store');
@@ -77,4 +75,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
     });
 
 
+});
+
+
+Route::group(['prefix' => 'v1', 'namespace' => 'Api\Admin', 'middleware' => ['api']], function () {
+    Route::apiResource('users', 'UsersController');
+    Route::apiResource('users', 'AccountsController');
 });

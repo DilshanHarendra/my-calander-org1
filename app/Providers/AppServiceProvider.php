@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,9 +14,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Cashier::ignoreMigrations();
+
+
         $this->app->bind(
             'App\Repositories\Account\AccountRepositoryInterface',
             'App\Repositories\Account\AccountEloquentRepository');
+
+        $this->app->bind(
+            'App\Repositories\Payment\PaymentRepositoryInterface',
+            'App\Repositories\Payment\PaymentEloquentRepository');
 
         $this->app->bind(
             'App\Repositories\User\UserRepositoryInterface',
