@@ -37,7 +37,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
 
         Route::get('/', 'TestController@index'); // TEST
         //calendar
-        Route::group(['prefix' => 'calendars', 'namespace'=>'Calendar','middleware' => ['jwt_auth']], function () {
+        Route::group(['prefix' => 'calendars', 'namespace'=>'Calendar'], function () {
 
             Route::get('/', 'CalendarController@index');
             Route::get('/{id}', 'CalendarController@show');
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
         });
 
         //event
-        Route::group(['prefix' => 'events', 'namespace'=>'Event','middleware' => ['jwt_auth']], function () {
+        Route::group(['prefix' => 'events', 'namespace'=>'Event'], function () {
             Route::get('/', 'EventController@index');
             Route::get('/{id}', 'EventController@show');
             Route::post('/', 'EventController@store');

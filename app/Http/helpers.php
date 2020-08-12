@@ -8,8 +8,6 @@ function current_tenant()
     return new \App\Http\Resources\Api\V1\AccountResource($account);
 }
 
-
-
 function current_user()
 {
     $user = auth('api')->user();

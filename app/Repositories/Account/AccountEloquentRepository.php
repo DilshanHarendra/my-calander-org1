@@ -6,7 +6,7 @@ use App\Enums\AccountType;
 use App\Models\Tenant\Account;
 
 
-class AccountRepository implements AccountRepositoryInterface
+class AccountEloquentRepository implements AccountRepositoryInterface
 {
     private $entity;
 
@@ -29,8 +29,6 @@ class AccountRepository implements AccountRepositoryInterface
 
     public function getDataById($hashKey)
     {
-
-        return Account::findOrFail($id);
         return $this->entity->getRouteKey($hashKey);
 
     }

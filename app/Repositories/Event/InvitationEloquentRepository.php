@@ -1,39 +1,35 @@
 <?php
 
-namespace App\Repositories\Calendar;
+namespace App\Repositories\Event;
 
-use App\Enums\CalendarType;
-use App\Models\Calendar\Calendar;
+use App\Models\Event\Invitation;
 
-class CalendarRepository implements CalendarRepositoryInterface
+class InvitationEloquentRepository implements InvitationRepositoryInterface
 {
     public function getAllData()
     {
-        return Calendar::get();
+        return Invitation::get();
     }
 
     public function getPaginatedData(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
-        return Calendar::paginate($limit);
+        return Invitation::paginate($limit);
     }
 
     public function getDataById($id)
     {
-        return Calendar::findorfail($id);
+        return Invitation::findorfail($id);
     }
 
-    public function getDataByEmail($email)
+    public function getDataByEvent($event)
     {
-        return Calendar::where('owner_email',$email)->get();
+        return Invitation::where('event_id',$event->id)->get();
     }
 
     public function createData(array $requestData)
     {
-        $requestData['owner_email'] ='shehan@digitalmediasolutions.com.au';
-        $requestData['accounts_id'] =1;
-        $requestData['type'] = CalendarType::NormalCalendar;
-        return Calendar::create($requestData);
+        return Invitation::create($requestData);
     }
 
     public function updateData(array $requestData, $id)
@@ -48,6 +44,5 @@ class CalendarRepository implements CalendarRepositoryInterface
         $entity = $this->getDataById($id);
         return $entity->delete();
     }
-
 
 }

@@ -35,8 +35,6 @@ class AuthController extends ApiController
 
     }
 
-
-
     /**
      * Get the authenticated User.
      *

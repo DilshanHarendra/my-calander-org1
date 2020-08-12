@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Repositories\Calendar;
+namespace App\Repositories\Event;
 
-use App\Models\Calendar\Subscriber;
+use App\Models\Event\Registration;
 
-class SubscriberRepository implements SubscriberRepositoryInterface
+class RegistrationEloquentRepository implements RegistrationRepositoryInterface
 {
     public function getAllData()
     {
-        return Subscriber::get();
+        return Registration::get();
     }
 
     public function getPaginatedData(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
-        return Subscriber::paginate($limit);
+        return Registration::paginate($limit);
     }
 
     public function getDataById($id)
     {
-        return Subscriber::findorfail($id);
+        return Registration::findorfail($id);
     }
 
-    public function getDataByCalendar($calendar)
+    public function getDataByEvent($event)
     {
-        return Subscriber::where('calendar_id',$calendar->id)->get();
+        return Registration::where('event_id',$event->id)->get();
     }
 
     public function createData(array $requestData)
     {
-        return Subscriber::create($requestData);
+        return Registration::create($requestData);
     }
 
     public function updateData(array $requestData, $id)
@@ -44,6 +44,5 @@ class SubscriberRepository implements SubscriberRepositoryInterface
         $entity = $this->getDataById($id);
         return $entity->delete();
     }
-
 
 }

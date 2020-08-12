@@ -14,13 +14,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EventController extends ApiController
 {
-    //created =>204
-    //delete => 202
     private $repository;
 
     public function __construct(EventRepositoryInterface $repository)
     {
-        $this->middleware('jwt_auth');
         $this->repository = $repository;
     }
 
@@ -37,7 +34,7 @@ class EventController extends ApiController
         }
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['message'=> $e->getMessage()], 404);
+            return response()->json(['message'=> 'Event not found'], 404);
         }
         catch(Exception $e)
         {
@@ -59,7 +56,7 @@ class EventController extends ApiController
         }
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['message'=> $e->getMessage()], 404);
+            return response()->json(['message'=> 'Event not found'], 404);
         }
         catch(Exception $e)
         {
@@ -76,7 +73,7 @@ class EventController extends ApiController
         }
         catch(ModelNotFoundException $e)
         {
-            return response()->json(['message'=> $e->getMessage()], 404);
+            return response()->json(['message'=> 'Event not found'], 404);
         }
         catch(Exception $e)
         {

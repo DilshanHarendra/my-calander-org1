@@ -7,7 +7,7 @@ use App\Models\Tenant\User;
 use App\Repositories\Account\AccountRepositoryInterface;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository implements UserRepositoryInterface
+class UserEloquentRepository implements UserRepositoryInterface
 {
     private $accountRepository;
 

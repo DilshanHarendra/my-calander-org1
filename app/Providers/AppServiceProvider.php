@@ -15,19 +15,23 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'App\Repositories\Account\AccountRepositoryInterface',
-            'App\Repositories\Account\AccountRepository');
+            'App\Repositories\Account\AccountEloquentRepository');
 
         $this->app->bind(
             'App\Repositories\User\UserRepositoryInterface',
-            'App\Repositories\User\UserRepository');
+            'App\Repositories\User\UserEloquentRepository');
 
         $this->app->bind(
             'App\Repositories\Calendar\CalendarRepositoryInterface',
-            'App\Repositories\Calendar\CalendarRepository');
+            'App\Repositories\Calendar\CalendarEloquentRepository');
 
         $this->app->bind(
             'App\Repositories\Event\EventRepositoryInterface',
-            'App\Repositories\Event\EventRepository');
+            'App\Repositories\Event\EventEloquentRepository');
+
+        $this->app->bind(
+            'App\Repositories\Event\InvitationRepositoryInterface',
+            'App\Repositories\Event\InvitationEloquentRepository');
 
     }
 

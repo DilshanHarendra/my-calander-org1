@@ -1,35 +1,35 @@
 <?php
 
-namespace App\Repositories\Event;
+namespace App\Repositories\Calendar;
 
-use App\Models\Event\Invitation;
+use App\Models\Calendar\Subscriber;
 
-class InvitationRepository implements InvitationRepositoryInterface
+class SubscriberEloquentRepository implements SubscriberRepositoryInterface
 {
     public function getAllData()
     {
-        return Invitation::get();
+        return Subscriber::get();
     }
 
     public function getPaginatedData(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
-        return Invitation::paginate($limit);
+        return Subscriber::paginate($limit);
     }
 
     public function getDataById($id)
     {
-        return Invitation::findorfail($id);
+        return Subscriber::findorfail($id);
     }
 
-    public function getDataByEvent($event)
+    public function getDataByCalendar($calendar)
     {
-        return Invitation::where('event_id',$event->id)->get();
+        return Subscriber::where('calendar_id',$calendar->id)->get();
     }
 
     public function createData(array $requestData)
     {
-        return Invitation::create($requestData);
+        return Subscriber::create($requestData);
     }
 
     public function updateData(array $requestData, $id)
@@ -44,5 +44,6 @@ class InvitationRepository implements InvitationRepositoryInterface
         $entity = $this->getDataById($id);
         return $entity->delete();
     }
+
 
 }

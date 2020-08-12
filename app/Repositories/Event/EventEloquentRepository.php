@@ -2,34 +2,39 @@
 
 namespace App\Repositories\Event;
 
-use App\Models\Event\Registration;
+use App\Enums\CalendarType;
+use App\Models\Event\Event;
 
-class RegistrationRepository implements RegistrationRepositoryInterface
+class EventEloquentRepository implements EventRepositoryInterface
 {
     public function getAllData()
     {
-        return Registration::get();
+        return Event::get();
     }
 
     public function getPaginatedData(array $requestData)
     {
         $limit  = isset($requestData['per_page']) ? $requestData['per_page'] : 10;
-        return Registration::paginate($limit);
+        return Event::paginate($limit);
     }
 
     public function getDataById($id)
     {
-        return Registration::findorfail($id);
+        return Event::findorfail($id);
     }
 
-    public function getDataByEvent($event)
+    public function getDataByEmail($email)
     {
-        return Registration::where('event_id',$event->id)->get();
+        return Event::where('creator_email',$email)->get();
     }
 
     public function createData(array $requestData)
     {
-        return Registration::create($requestData);
+        $requestData['creator_email'] ='shehan@digitalmediasolutions.com.au';
+        $requestData['calendar_id'] = 1;
+        $requestData['category_id'] = 1;
+        $requestData['cover_image_id'] = null;
+        return Event::create($requestData);
     }
 
     public function updateData(array $requestData, $id)
