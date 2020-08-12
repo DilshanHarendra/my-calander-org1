@@ -88,3 +88,12 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
 
 
 });
+
+
+
+
+
+Route::group(['prefix' => 'v1', 'namespace' => 'Api\Admin', 'middleware' => ['api']], function () {
+
+
+});
