@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Api\V1\Tenant;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Payment\PaymentRepositoryInterface;
+use App\Repositories\Subscription\SubscriptionRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class PaymentsController extends Controller
+class SubscriptionsController extends Controller
 {
 
     private $repository;
 
-    public function __construct(PaymentRepositoryInterface $repository)
+    public function __construct(SubscriptionRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

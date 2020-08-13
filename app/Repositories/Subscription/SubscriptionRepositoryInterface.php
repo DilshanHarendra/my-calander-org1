@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Repositories\Payment;
+namespace App\Repositories\Subscription;
 
 
-interface PaymentRepositoryInterface
+interface SubscriptionRepositoryInterface
 {
     public function getAllPayments($accountId);
 

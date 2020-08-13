@@ -27,10 +27,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
 
         //Payments
         Route::group(['namespace' => 'Tenant'], function () {
-            Route::get('payments', 'PaymentsController@index');
-            Route::post('payments', 'PaymentsController@store');
-            Route::put('subscription', 'API\UserController@updateSubscription');
-            Route::delete('payments/{id}', 'PaymentsController@destory');
+            Route::get('subscription', 'SubscriptionsController@index');
+            Route::post('subscription', 'SubscriptionsController@store');
+            Route::put('subscription', 'SubscriptionsController@updateSubscription');
+            Route::delete('subscription/{id}', 'SubscriptionsController@destory');
         });
 
 

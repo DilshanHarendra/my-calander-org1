@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Repositories\Payment;
+namespace App\Repositories\Subscription;
 
 
 use App\Repositories\Account\AccountRepositoryInterface;
 
-class PaymentEloquentRepository implements PaymentRepositoryInterface
+class SubscriptionEloquentRepository implements SubscriptionRepositoryInterface
 {
 
     private $accountRepository;
