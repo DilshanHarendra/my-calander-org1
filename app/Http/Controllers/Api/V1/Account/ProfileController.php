@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Account;
 
+use App\Http\Controllers\Api\V1\ApiController;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\UserResource;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class ProfileController extends ApiController
 {
 
     public function __construct()

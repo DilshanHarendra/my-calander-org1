@@ -9,10 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserEloquentRepository implements UserRepositoryInterface
 {
+    private $entity;
+
     private $accountRepository;
 
-    public function __construct(AccountRepositoryInterface $accountRepository)
+    public function __construct(User $entity, AccountRepositoryInterface $accountRepository)
     {
+        $this->entity = $entity;
         $this->accountRepository = $accountRepository;
     }
 
@@ -23,17 +26,19 @@ class UserEloquentRepository implements UserRepositoryInterface
 
     public function getPaginatedData(array $request)
     {
-        // TODO: Implement getPaginatedData() method.
+        $limit  = isset($request['per_page']) ? $request['per_page'] : 10;
+        return $this->entity->paginage($limit);
+
     }
 
     public function getDataById(int $id)
     {
-        return User::findOrFail($id);
+        return $this->entity->findOrFail($id);
     }
 
     public function getDataByKeyAndValue($key, $value)
     {
-        return User::where($key, $value)->first();
+        return $this->entity->where($key, $value)->first();
     }
 
     public function createData(array $request)
@@ -50,9 +55,12 @@ class UserEloquentRepository implements UserRepositoryInterface
 
     public function updateData(int $id, array $request)
     {
-        $entity = $this->getDataById($id);
-        $entity->update($request);
-        return $entity;
+        $user = $this->getDataById($id);
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = Hash::make($request['password']);
+        $user->save();
+        return $user;
     }
 
     public function deleteData(int $id)

@@ -8,5 +8,21 @@ use Illuminate\Http\Request;
 
 class InviteController extends ApiController
 {
-    //
+
+    public function getAllInvites()
+    {
+
+    }
+
+
+    public function process()
+    {
+
+    }
+
+
+    public function destroy()
+    {
+
+    }
 }

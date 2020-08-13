@@ -14,23 +14,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']], function () {
+Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
-    Route::post('register', 'RegisterController@register');
-    Route::post('login', 'AuthController@login');
-    Route::post('password/reset', 'PasswordController@resetEmail');
-    Route::get('me', 'ProfileController@selfProfile');
+    Route::post('register', 'Account\RegisterController@register');
+    Route::post('login', 'Account\AuthController@login');
+    Route::post('password/reset', 'Account\PasswordController@resetEmail');
+    Route::get('me', 'Account\ProfileController@selfProfile');
 
     Route::group(['prefix' => '{account}'], function () {
 
         Route::get('/', 'TestController@index'); // TEST
 
         //Payments
-        Route::group(['namespace' => 'Tenant'], function () {
-            Route::get('subscription', 'SubscriptionsController@index');
-            Route::post('subscription', 'SubscriptionsController@store');
-            Route::put('subscription', 'SubscriptionsController@updateSubscription');
-            Route::delete('subscription/{id}', 'SubscriptionsController@destory');
+        Route::group(['prefix' => 'settings', 'namespace' => 'Tenant'], function () {
+
+            /**
+             * Implement the account edit and account view feature
+             */
+            Route::get('account', 'AccountsController@showProfile');
+            Route::post('account', 'AccountsController@updateProfile');
+            Route::delete('account', 'AccountsController@destroy');
+
+            /**
+             * Account Invitation feature
+             */
+            Route::get('invites', 'InviteController@getAllInvites');
+            Route::post('invites', 'InviteController@process');
+            Route::delete('invites/{invite}', 'InviteController@destroy');
+
+            /**
+             * Account user feature
+             */
+            Route::get('users', 'UsersController@index');
+            Route::put('users/{user}', 'UsersController@update');
+            Route::delete('users/{user}', 'UsersController@destory');
+
+            /**
+             * Account Subscription feature
+             */
+            Route::get('billing', 'SubscriptionsController@index');
+            Route::post('billing', 'SubscriptionsController@store');
+            Route::put('billing', 'SubscriptionsController@updateSubscription');
+            Route::delete('billing/{id}', 'SubscriptionsController@destory');
         });
 
 
@@ -78,7 +103,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1', 'middleware' => ['api']
 });
 
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api\Admin', 'middleware' => ['api']], function () {
+Route::group(['prefix' => 'v1', 'namespace' => 'Api\Admin'], function () {
     Route::apiResource('users', 'UsersController');
     Route::apiResource('users', 'AccountsController');
 });

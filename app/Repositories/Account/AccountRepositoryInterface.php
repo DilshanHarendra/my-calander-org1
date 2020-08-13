@@ -20,4 +20,16 @@ interface AccountRepositoryInterface
 
     public function deleteData(int $id);
 
+
+    public function getAccountUsers($accountId);
+
+    public function createAccountUser($accountId, $request);
+
+    public function updateAccountUser($accountId, $userId, $request);
+
+    public function removeAccountUser($accountId, $userId);
+
+
+
+
 }
