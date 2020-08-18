@@ -25,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Subscription\SubscriptionRepositoryInterface',
             'App\Repositories\Subscription\SubscriptionEloquentRepository');
 
+
+        $this->app->bind(
+            'App\Repositories\Invite\InviteRepositoryInterface',
+            'App\Repositories\Invite\InviteEloquentRepository');
+
+
         $this->app->bind(
             'App\Repositories\User\UserRepositoryInterface',
             'App\Repositories\User\UserEloquentRepository');

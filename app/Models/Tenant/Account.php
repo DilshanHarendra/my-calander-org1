@@ -41,16 +41,33 @@ class Account extends Model
     ];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function invites()
+    {
+        return $this->hasMany(Invite::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
         return $this->belongsToMany(User::class)->withPivot('role')->withTimestamps();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function calendars()
     {
         return $this->hasMany(Calendar::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
     public function events()
     {
         return $this->hasManyThrough(Event::class,Calendar::class);
