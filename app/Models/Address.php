@@ -9,18 +9,23 @@ class Address extends Model
     protected $table = 'addresses';
 
     protected $fillable = [
+        'floor',
         'full_address',
-        'street_1',
-        'street_2',
+        'street_number',
+        'street',
         'city',
         'province',
         'country',
         'longitude',
         'latitude',
+        'postal_code',
     ];
 
     public function addressable()
     {
         return $this->morphTo();
     }
+
+
+
 }

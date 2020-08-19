@@ -19,14 +19,17 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('full_address');
-            $table->string('street_1');
-            $table->string('street_2')->nullable()->default(null);
-            $table->string('city');
-            $table->string('province');
-            $table->string('country');
-            $table->string('longitude');
-            $table->string('latitude');
+            $table->string('place_id')->nullable()->default(null);
+            $table->string('full_address')->nullable()->default(null);
+            $table->string('street')->nullable()->default(null);
+            $table->string('street_no')->nullable()->default(null);
+            $table->string('floor')->nullable()->default(null);
+            $table->string('city')->nullable()->default(null);
+            $table->string('province')->nullable()->default(null);
+            $table->string('country')->nullable()->default(null);
+            $table->string('longitude')->nullable()->default(null);
+            $table->string('latitude')->nullable()->default(null);
+            $table->string('postal_code')->nullable()->default(null);
             $table->string('addressable_id');
             $table->string('addressable_type');
 

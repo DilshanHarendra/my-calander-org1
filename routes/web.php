@@ -34,3 +34,8 @@ Route::get('accept/{token}', 'InviteController@accept');
 
 Route::get('password/reset/{token}', 'PasswordResetController@resetPassword');
 
+
+
+Route::get('/events/{event}/{provider}', 'Event\EventController@provider');
+
+

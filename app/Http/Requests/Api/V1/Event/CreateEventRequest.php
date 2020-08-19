@@ -31,6 +31,7 @@ class CreateEventRequest extends FormRequest
             'end_at' => ['required', 'date_format:Y-m-d H:i','after:start_at'],
             'calendar_id' => ['required', 'numeric'],
             'category_id' => ['required', 'numeric'],
+            'place_id' => ['string','nullable'],
         ];
     }
 }
