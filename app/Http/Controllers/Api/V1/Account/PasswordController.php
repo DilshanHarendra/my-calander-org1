@@ -24,15 +24,31 @@ class PasswordController extends ApiController
      */
     public function resetEmail(ResetEmailRequest $request)
     {
-        return $this->repository->resetEmail($request->validated());
+
+        $tokenData = $this->repository->resetEmail($request->validated());
+
+        if ($this->sendResetEmail($request->get('email'), $tokenData->token)) {
+            return response()->json(['status' => trans('A reset link has been sent to your email address.')]);
+        }
+
+        return response()->json(['error' => trans('A Network Error occurred. Please try again.')]);
     }
 
 
     /**
      * @param ResetPasswordRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
+        $tokenData = $this->repository->getResetToken($request->validated());
 
+        $user = $this->repository->resetPassword($tokenData, $request->validated());
+
+        if ($this->sendSuccessEmail($user->email)) {
+            return response()->json(['error' => trans('Password reset successful.')]);
+
+        }
+        return response()->json(['email' => trans('A Network Error occurred. Please try again.')]);
     }
 }

@@ -23,5 +23,10 @@ interface UserRepositoryInterface
 
     public function resetEmail(array $request);
 
+    public function resetPassword(object $token, array $request);
+
+    public function getResetToken(array $request);
+
+    public function removeResetToken(object $user);
 
 }

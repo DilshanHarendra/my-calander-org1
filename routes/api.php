@@ -18,7 +18,12 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
 
     Route::post('register', 'Account\RegisterController@register');
     Route::post('login', 'Account\AuthController@login');
-    Route::post('password/reset', 'Account\PasswordController@resetEmail');
+
+    Route::post('password/email', 'Account\PasswordController@resetEmail');
+    Route::post('password/reset', 'Account\PasswordController@resetPassword');
+
+
+
     Route::get('me', 'Account\ProfileController@selfProfile');
 
     Route::group(['prefix' => '{account}'], function () {
