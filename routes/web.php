@@ -26,3 +26,11 @@ use Illuminate\Support\Facades\Route;
  * Accept invitation route
  */
 Route::get('accept/{token}', 'InviteController@accept');
+
+
+/**
+ * Password reset route
+ */
+
+Route::get('password/reset/{token}', 'PasswordResetController@resetPassword');
+

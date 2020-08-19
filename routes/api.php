@@ -20,7 +20,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
     Route::post('login', 'Account\AuthController@login');
 
     Route::post('password/email', 'Account\PasswordController@resetEmail');
-    Route::post('password/reset', 'Account\PasswordController@resetPassword');
 
 
 
