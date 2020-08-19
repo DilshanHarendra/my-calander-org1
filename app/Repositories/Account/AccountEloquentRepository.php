@@ -29,13 +29,15 @@ class AccountEloquentRepository implements AccountRepositoryInterface
 
     public function getDataById($hashKey)
     {
-        return $this->entity->getRouteKey($hashKey);
+        return $this->entity->findOrFial($hashKey);
 
     }
 
+
+
     public function getDataByKeyAndValue($key, $value)
     {
-        return Account::where($key, $value)->first();
+        return $this->entity->where($key, $value)->first();
     }
 
     /**
@@ -70,5 +72,27 @@ class AccountEloquentRepository implements AccountRepositoryInterface
     {
         $entity = $this->getDataById($id);
         return $entity->delete();
+    }
+
+
+    public function getAccountUsers($accountId)
+    {
+        return $this->getDataById($accountId)->users;
+    }
+
+
+    public function createAccountUser($accountId, $request)
+    {
+        // TODO: Implement createAccountUser() method.
+    }
+
+    public function updateAccountUser($accountId, $userId, $request)
+    {
+        // TODO: Implement updateAccountUser() method.
+    }
+
+    public function removeAccountUser($accountId, $userId)
+    {
+        // TODO: Implement removeAccountUser() method.
     }
 }
