@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\SaveBase64ToFileService;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
 
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Cashier::ignoreMigrations();
 
+        $this->app->bind(SaveBase64ToFileService::class,function($app){
+            return new SaveBase64ToFileService();
+        });
 
         $this->app->bind(
             'App\Repositories\Account\AccountRepositoryInterface',
@@ -49,6 +53,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             'App\Repositories\Event\RegistrationRepositoryInterface',
             'App\Repositories\Event\RegistrationEloquentRepository');
+
+        $this->app->bind(
+            'App\Repositories\Address\AddressRepositoryInterface',
+            'App\Repositories\Address\AddressEloquentRepository');
 
     }
 

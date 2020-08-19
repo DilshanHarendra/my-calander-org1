@@ -23,6 +23,11 @@ class CalendarEloquentRepository implements CalendarRepositoryInterface
         return Calendar::findorfail($id);
     }
 
+    public function getDataByAccount($account)
+    {
+        return Calendar::where('account_id',$account->id)->get();
+    }
+
     public function getDataByEmail($email)
     {
         return Calendar::where('owner_email',$email)->get();

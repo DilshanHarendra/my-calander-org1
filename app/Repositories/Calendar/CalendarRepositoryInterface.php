@@ -13,6 +13,8 @@ interface CalendarRepositoryInterface
 
     public function getDataByEmail($email);
 
+    public function getDataByAccount($account);
+
     public function createData(array $requestData);
 
     public function updateData(array $requestData, $id);

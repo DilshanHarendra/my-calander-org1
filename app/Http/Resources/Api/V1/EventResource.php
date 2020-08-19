@@ -23,6 +23,7 @@ class EventResource extends JsonResource
             "time_zone" => $this->timezone,
             "calendar" => $this->calendar->getRouteKey(),
             "category" => $this->category->title,
+            "location" => new AddressResource($this->address)
         ];
     }
 }
